@@ -1,0 +1,748 @@
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-4">Playwright Configuration Generator</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+            <!-- Basic Settings -->
+            <div class="card">
+                <h2 class="card-header">Basic Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="testDir" class="form-label">
+                            testDir
+                            <span class="tooltip" data-tip="Specify the directory containing test files">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="testDir" class="form-input" value="./tests"
+                            aria-describedby="testDir-help">
+                        <small id="testDir-help" class="form-help">Example: ./tests</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullyParallel" class="form-label">
+                            fullyParallel
+                            <span class="tooltip" data-tip="Run all tests in parallel">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="checkbox" id="fullyParallel" class="form-checkbox" checked
+                            aria-describedby="fullyParallel-help">
+                        <small id="fullyParallel-help" class="form-help">Enable full parallel execution</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="forbidOnly" class="form-label">
+                            forbidOnly
+                            <span class="tooltip" data-tip="Fail the test if test.only is used in CI">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="checkbox" id="forbidOnly" class="form-checkbox"
+                            aria-describedby="forbidOnly-help">
+                        <small id="forbidOnly-help" class="form-help">Forbid test.only in CI</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="globalTimeout" class="form-label">
+                            globalTimeout
+                            <span class="tooltip" data-tip="Maximum execution time for all tests (ms), 0 means unlimited">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="globalTimeout" class="form-input" value="0"
+                            aria-describedby="globalTimeout-help">
+                        <small id="globalTimeout-help" class="form-help">Milliseconds, 0 means unlimited</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeout" class="form-label">
+                            timeout
+                            <span class="tooltip" data-tip="Timeout for each test (ms), default is 30 seconds">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="timeout" class="form-input" value="30000"
+                            aria-describedby="timeout-help">
+                        <small id="timeout-help" class="form-help">Milliseconds, default is 30 seconds</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="retries" class="form-label">
+                            retries
+                            <span class="tooltip" data-tip="Number of retries for failed tests in CI">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="retries" class="form-input" value="0"
+                            aria-describedby="retries-help">
+                        <small id="retries-help" class="form-help">Default is 0</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="workers" class="form-label">
+                            workers
+                            <span class="tooltip"
+                                data-tip="Disable parallel execution in CI, otherwise use default number of workers">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="workers" class="form-input" aria-describedby="workers-help">
+                        <small id="workers-help" class="form-help">Default is half the number of CPU cores</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="card">
+                <h2 class="card-header">Filters</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="grep" class="form-label">
+                            grep
+                            <span class="tooltip" data-tip="Filter tests that match the pattern">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="grep" class="form-input" aria-describedby="grep-help">
+                        <small id="grep-help" class="form-help">Accepts RegExp or RegExp[], e.g., /@smoke/</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="grepInvert" class="form-label">
+                            grepInvert
+                            <span class="tooltip" data-tip="Exclude tests that match the pattern">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="grepInvert" class="form-input" aria-describedby="grepInvert-help">
+                        <small id="grepInvert-help" class="form-help">Accepts RegExp or RegExp[], e.g., /@manual/</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snapshots -->
+            <div class="card">
+                <h2 class="card-header">Snapshots</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="ignoreSnapshots" class="form-label">
+                            ignoreSnapshots
+                            <span class="tooltip" data-tip="Ignore snapshot tests">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="checkbox" id="ignoreSnapshots" class="form-checkbox"
+                            aria-describedby="ignoreSnapshots-help">
+                        <small id="ignoreSnapshots-help" class="form-help">Ignore snapshots</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateSnapshots" class="form-label">
+                            updateSnapshots
+                            <span class="tooltip" data-tip="Set snapshot update strategy">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="updateSnapshots" class="form-select" aria-describedby="updateSnapshots-help">
+                            <option value="all">all</option>
+                            <option value="none">none</option>
+                            <option value="missing" selected>missing</option>
+                        </select>
+                        <small id="updateSnapshots-help" class="form-help">Snapshot update strategy</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports -->
+            <div class="card">
+                <h2 class="card-header">Reports</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="reporter" class="form-label">
+                            reporter
+                            <span class="tooltip" data-tip="Set reporter">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="reporter" class="form-select" aria-describedby="reporter-help">
+                            <option value="list">list</option>
+                            <option value="dot">dot</option>
+                            <option value="line">line</option>
+                            <option value="github">github</option>
+                            <option value="json">json</option>
+                            <option value="junit">junit</option>
+                            <option value="null">null</option>
+                            <option value="html" selected>html</option>
+                        </select>
+                        <small id="reporter-help" class="form-help">Choose reporter type</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Settings -->
+            <div class="card">
+                <h2 class="card-header">Other Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="repeatEach" class="form-label">
+                            repeatEach
+                            <span class="tooltip" data-tip="Number of times to repeat each test">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="repeatEach" class="form-input" value="1"
+                            aria-describedby="repeatEach-help">
+                        <small id="repeatEach-help" class="form-help">Default is 1</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxFailures" class="form-label">
+                            maxFailures
+                            <span class="tooltip" data-tip="Maximum allowed test failures before stopping. Set to 0 to disable">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="maxFailures" class="form-input" value="0"
+                            aria-describedby="maxFailures-help">
+                        <small id="maxFailures-help" class="form-help">Default is 0</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="outputDir" class="form-label">
+                            outputDir
+                            <span class="tooltip" data-tip="Set the output directory for test results">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="outputDir" class="form-input" value="test-results"
+                            aria-describedby="outputDir-help">
+                        <small id="outputDir-help" class="form-help">Default is test-results</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="preserveOutput" class="form-label">
+                            preserveOutput
+                            <span class="tooltip" data-tip="Set whether to preserve test output">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="preserveOutput" class="form-select" aria-describedby="preserveOutput-help">
+                            <option value="always" selected>always</option>
+                            <option value="never">never</option>
+                            <option value="failures-only">failures-only</option>
+                        </select>
+                        <small id="preserveOutput-help" class="form-help">Choose whether to preserve test output</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slow Test Report -->
+            <div class="card">
+                <h2 class="card-header">Slow Test Report</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="reportSlowTestsMax" class="form-label">
+                            reportSlowTests.max
+                            <span class="tooltip" data-tip="Maximum number of slow test files to report. Set to 0 to report all exceeding threshold">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="reportSlowTestsMax" class="form-input" value="5"
+                            aria-describedby="reportSlowTestsMax-help">
+                        <small id="reportSlowTestsMax-help" class="form-help">Default is 5</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportSlowTestsThreshold" class="form-label">
+                            reportSlowTests.threshold
+                            <span class="tooltip" data-tip="Threshold for slow tests in milliseconds, default is 15 seconds">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="reportSlowTestsThreshold" class="form-input" value="15000"
+                            aria-describedby="reportSlowTestsThreshold-help">
+                        <small id="reportSlowTestsThreshold-help" class="form-help">Milliseconds, default is 15 seconds</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Settings -->
+            <div class="card">
+                <h2 class="card-header">Global Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="quiet" class="form-label">
+                            quiet
+                            <span class="tooltip" data-tip="Enable silent mode, hide test execution output">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="checkbox" id="quiet" class="form-checkbox" aria-describedby="quiet-help">
+                        <small id="quiet-help" class="form-help">Enable silent mode</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="globalSetup" class="form-label">
+                            globalSetup
+                            <span class="tooltip" data-tip="Specify global setup file">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="globalSetup" class="form-input"
+                            aria-describedby="globalSetup-help">
+                        <small id="globalSetup-help" class="form-help">Example: ./global-setup.ts</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="globalTeardown" class="form-label">
+                            globalTeardown
+                            <span class="tooltip" data-tip="Specify global teardown file">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="globalTeardown" class="form-input"
+                            aria-describedby="globalTeardown-help">
+                        <small id="globalTeardown-help" class="form-help">Example: ./global-teardown.ts</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">
+                            name
+                            <span class="tooltip" data-tip="Set name to display in reports">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="name" class="form-input" value="My Test Suite"
+                            aria-describedby="name-help">
+                        <small id="name-help" class="form-help">Set test suite name</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Settings -->
+            <div class="card">
+                <h2 class="card-header">Usage Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="useBrowserName" class="form-label">
+                            use.browserName
+                            <span class="tooltip" data-tip="Browser settings">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="useBrowserName" class="form-select" aria-describedby="useBrowserName-help">
+                            <option value="chromium" selected>chromium</option>
+                            <option value="firefox">firefox</option>
+                            <option value="webkit">webkit</option>
+                        </select>
+                        <small id="useBrowserName-help" class="form-help">Choose browser type</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useIgnoreHTTPSErrors" class="form-label">
+                            use.ignoreHTTPSErrors
+                            <span class="tooltip" data-tip="Ignore HTTPS errors">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="checkbox" id="useIgnoreHTTPSErrors" class="form-checkbox" checked
+                            aria-describedby="useIgnoreHTTPSErrors-help">
+                        <small id="useIgnoreHTTPSErrors-help" class="form-help">Ignore HTTPS errors</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useViewportWidth" class="form-label">
+                            use.viewport.width
+                            <span class="tooltip" data-tip="Default viewport width">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="useViewportWidth" class="form-input" value="1280"
+                            aria-describedby="useViewportWidth-help">
+                        <small id="useViewportWidth-help" class="form-help">Default viewport width</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useViewportHeight" class="form-label">
+                            use.viewport.height
+                            <span class="tooltip" data-tip="Default viewport height">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="useViewportHeight" class="form-input" value="720"
+                            aria-describedby="useViewportHeight-help">
+                        <small id="useViewportHeight-help" class="form-help">Default viewport height</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useTrace" class="form-label">
+                            use.trace
+                            <span class="tooltip" data-tip="Record trace">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="useTrace" class="form-select" aria-describedby="useTrace-help">
+                            <option value="off">off</option>
+                            <option value="on">on</option>
+                            <option value="retain-on-failure">retain-on-failure</option>
+                            <option value="on-first-retry" selected>on-first-retry</option>
+                        </select>
+                        <small id="useTrace-help" class="form-help">Choose trace recording strategy</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useVideo" class="form-label">
+                            use.video
+                            <span class="tooltip" data-tip="Record video">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="useVideo" class="form-select" aria-describedby="useVideo-help">
+                            <option value="off" selected>off</option>
+                            <option value="on">on</option>
+                            <option value="retain-on-failure">retain-on-failure</option>
+                            <option value="on-first-retry">on-first-retry</option>
+                        </select>
+                        <small id="useVideo-help" class="form-help">Choose video recording strategy</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useScreenshot" class="form-label">
+                            use.screenshot
+                            <span class="tooltip" data-tip="Record screenshots during execution">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="useScreenshot" class="form-select" aria-describedby="useScreenshot-help">
+                            <option value="off">off</option>
+                            <option value="on">on</option>
+                            <option value="only-on-failure" selected>only-on-failure</option>
+                        </select>
+                        <small id="useScreenshot-help" class="form-help">Choose screenshot recording strategy</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Geolocation -->
+            <div class="card">
+                <h2 class="card-header">Geolocation</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="useGeolocationLongitude" class="form-label">
+                            use.geolocation.longitude
+                            <span class="tooltip" data-tip="Set longitude">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="useGeolocationLongitude" class="form-input" value="12.492507"
+                            aria-describedby="useGeolocationLongitude-help">
+                        <small id="useGeolocationLongitude-help" class="form-help">Set longitude</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useGeolocationLatitude" class="form-label">
+                            use.geolocation.latitude
+                            <span class="tooltip" data-tip="Set latitude">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="useGeolocationLatitude" class="form-input" value="41.889938"
+                            aria-describedby="useGeolocationLatitude-help">
+                        <small id="useGeolocationLatitude-help" class="form-help">Set latitude</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language and Timezone -->
+            <div class="card">
+                <h2 class="card-header">Language and Timezone</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="useLocale" class="form-label">
+                            use.locale
+                            <span class="tooltip" data-tip="Set default browser language">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="useLocale" class="form-input" value="zh-TW"
+                            aria-describedby="useLocale-help">
+                        <small id="useLocale-help" class="form-help">Set default browser language</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useTimezoneId" class="form-label">
+                            use.timezoneId
+                            <span class="tooltip" data-tip="Set timezone">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="useTimezoneId" class="form-input" value="Asia/Taipei"
+                            aria-describedby="useTimezoneId-help">
+                        <small id="useTimezoneId-help" class="form-help">Set timezone</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HTTP Headers -->
+            <div class="card">
+                <h2 class="card-header">HTTP Headers</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="useExtraHTTPHeaders" class="form-label">
+                            use.extraHTTPHeaders
+                            <span class="tooltip" data-tip="Set extra headers for HTTP requests">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <textarea id="useExtraHTTPHeaders" class="form-textarea"
+                            aria-describedby="useExtraHTTPHeaders-help">
+{
+  "Accept-Language": "zh-TW"
+}
+                        </textarea>
+                        <small id="useExtraHTTPHeaders-help" class="form-help">Set extra headers for HTTP requests, JSON format</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Browser Options -->
+            <div class="card">
+                <h2 class="card-header">Browser Options</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="useJavaScriptEnabled" class="form-label">
+                            use.javaScriptEnabled
+                            <span class="tooltip" data-tip="Enable JavaScript">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="checkbox" id="useJavaScriptEnabled" class="form-checkbox" checked
+                            aria-describedby="useJavaScriptEnabled-help">
+                        <small id="useJavaScriptEnabled-help" class="form-help">Enable JavaScript</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useHasTouch" class="form-label">
+                            use.hasTouch
+                            <span class="tooltip" data-tip="Enable touch events">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="checkbox" id="useHasTouch" class="form-checkbox"
+                            aria-describedby="useHasTouch-help">
+                        <small id="useHasTouch-help" class="form-help">Enable touch events</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useUserAgent" class="form-label">
+                            use.userAgent
+                            <span class="tooltip" data-tip="Set user agent string">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="useUserAgent" class="form-input" aria-describedby="useUserAgent-help">
+                        <small id="useUserAgent-help" class="form-help">Set user agent string</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="useAcceptDownloads" class="form-label">
+                            use.acceptDownloads
+                            <span class="tooltip" data-tip="Automatically accept downloads">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="checkbox" id="useAcceptDownloads" class="form-checkbox" checked
+                            aria-describedby="useAcceptDownloads-help">
+                        <small id="useAcceptDownloads-help" class="form-help">Automatically accept downloads</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Settings -->
+            <div class="card">
+                <h2 class="card-header">Project Settings</h2>
+                <div class="card-content">
+                    <!-- Project settings content, can be dynamically generated with JavaScript -->
+                </div>
+            </div>
+
+            <!-- Shard Settings -->
+            <div class="card">
+                <h2 class="card-header">Shard Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="shardTotal" class="form-label">
+                            shard.total
+                            <span class="tooltip" data-tip="Set shard for splitting tests">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="shardTotal" class="form-input" aria-describedby="shardTotal-help">
+                        <small id="shardTotal-help" class="form-help">Total number of shards</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="shardCurrent" class="form-label">
+                            shard.current
+                            <span class="tooltip" data-tip="Set shard for splitting tests">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="shardCurrent" class="form-input" aria-describedby="shardCurrent-help">
+                        <small id="shardCurrent-help" class="form-help">Current shard to execute, starting from 1</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expect Settings -->
+            <div class="card">
+                <h2 class="card-header">Expect Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="expectTimeout" class="form-label">
+                            expect.timeout
+                            <span class="tooltip" data-tip="Default timeout for expect (ms)">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="expectTimeout" class="form-input" value="5000"
+                            aria-describedby="expectTimeout-help">
+                        <small id="expectTimeout-help" class="form-help">Default timeout for expect (ms)</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- toMatchSnapshot Settings -->
+            <div class="card">
+                <h2 class="card-header">toMatchSnapshot Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="expectToMatchSnapshotThreshold" class="form-label">
+                            expect.toMatchSnapshot.threshold
+                            <span class="tooltip" data-tip="Allowed color difference threshold, between 0 (strict) and 1 (loose)">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="expectToMatchSnapshotThreshold" class="form-input" value="0.2"
+                            aria-describedby="expectToMatchSnapshotThreshold-help">
+                        <small id="expectToMatchSnapshotThreshold-help" class="form-help">Allowed color difference threshold, between 0 (strict) and 1 (loose)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectToMatchSnapshotMaxDiffPixels" class="form-label">
+                            expect.toMatchSnapshot.maxDiffPixels
+                            <span class="tooltip" data-tip="Maximum allowed pixel difference">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="expectToMatchSnapshotMaxDiffPixels" class="form-input" value="10"
+                            aria-describedby="expectToMatchSnapshotMaxDiffPixels-help">
+                        <small id="expectToMatchSnapshotMaxDiffPixels-help" class="form-help">Maximum allowed pixel difference</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectToMatchSnapshotMaxDiffPixelRatio" class="form-label">
+                            expect.toMatchSnapshot.maxDiffPixelRatio
+                            <span class="tooltip" data-tip="Maximum allowed pixel difference ratio, between 0 and 1">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="expectToMatchSnapshotMaxDiffPixelRatio" class="form-input"
+                            value="0.1" aria-describedby="expectToMatchSnapshotMaxDiffPixelRatio-help">
+                        <small id="expectToMatchSnapshotMaxDiffPixelRatio-help" class="form-help">Maximum allowed pixel difference ratio, between 0 and 1</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- toHaveScreenshot Settings -->
+            <div class="card">
+                <h2 class="card-header">toHaveScreenshot Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="expectToHaveScreenshotAnimations" class="form-label">
+                            expect.toHaveScreenshot.animations
+                            <span class="tooltip" data-tip="Allow animations">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="expectToHaveScreenshotAnimations" class="form-select"                             aria-describedby="expectToHaveScreenshotAnimations-help">
+                            <option value="allow">allow</option>
+                            <option value="disabled" selected>disabled</option>
+                        </select>
+                        <small id="expectToHaveScreenshotAnimations-help" class="form-help">Allow animations</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectToHaveScreenshotCaret" class="form-label">
+                            expect.toHaveScreenshot.caret
+                            <span class="tooltip" data-tip="Hide caret">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="expectToHaveScreenshotCaret" class="form-select"
+                            aria-describedby="expectToHaveScreenshotCaret-help">
+                            <option value="hide" selected>hide</option>
+                            <option value="initial">initial</option>
+                        </select>
+                        <small id="expectToHaveScreenshotCaret-help" class="form-help">Hide caret</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectToHaveScreenshotScale" class="form-label">
+                            expect.toHaveScreenshot.scale
+                            <span class="tooltip" data-tip="Set scaling mode">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="expectToHaveScreenshotScale" class="form-select"
+                            aria-describedby="expectToHaveScreenshotScale-help">
+                            <option value="css" selected>css</option>
+                            <option value="device">device</option>
+                        </select>
+                        <small id="expectToHaveScreenshotScale-help" class="form-help">Set scaling mode</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectToHaveScreenshotThreshold" class="form-label">
+                            expect.toHaveScreenshot.threshold
+                            <span class="tooltip" data-tip="Allowed color difference threshold, between 0 (strict) and 1 (loose)">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="expectToHaveScreenshotThreshold" class="form-input" value="0.2"
+                            aria-describedby="expectToHaveScreenshotThreshold-help">
+                        <small id="expectToHaveScreenshotThreshold-help" class="form-help">Allowed color difference threshold, between 0 (strict) and 1 (loose)</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- toPass Settings -->
+            <div class="card">
+                <h2 class="card-header">toPass Settings</h2>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="expectToPassTimeout" class="form-label">
+                            expect.toPass.timeout
+                            <span class="tooltip" data-tip="Timeout for toPass method (ms)">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="number" id="expectToPassTimeout" class="form-input" value="5000"
+                            aria-describedby="expectToPassTimeout-help">
+                        <small id="expectToPassTimeout-help" class="form-help">Timeout for toPass method (ms)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectToPassIntervals" class="form-label">
+                            expect.toPass.intervals
+                            <span class="tooltip" data-tip="Polling intervals for toPass method (ms)">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <textarea id="expectToPassIntervals" class="form-textarea"
+                            aria-describedby="expectToPassIntervals-help">
+[100, 250, 500, 1000]
+                        </textarea>
+                        <small id="expectToPassIntervals-help" class="form-help">Polling intervals for toPass method (ms), JSON format</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-4 flex justify-end">
+            <button id="resetButton"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2">
+                Reset Settings
+            </button>
+            <button id="generateButton"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Generate Config
+            </button>
+        </div>
+
+        <div id="configPreview" class="mt-4 border rounded p-4 bg-gray-200 dark:bg-gray-800" style="display: none;">
+            <h2 class="text-xl font-bold mb-2">playwright.config.ts Preview</h2>
+            <pre id="configCode" class="text-sm whitespace-pre-wrap"></pre>
+            <button id="downloadButton"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2"
+                style="display: none;">
+                Download Config
+            </button>
+        </div>
+
+        <div id="history" class="mt-4">
+            <h2 class="text-xl font-bold mb-2">History</h2>
+            <ul id="historyList"></ul>
+        </div>
+    </div>
+
+</body>
